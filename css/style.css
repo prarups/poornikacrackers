@@ -1968,6 +1968,10 @@ button:active, .btn-checkout-primary:active {
   font-size: 0.85rem;
 }
 
+.mobile-mrp {
+  display: none;
+}
+
 .table-rate {
   font-weight: 900;
   color: #dc2626;
@@ -2439,11 +2443,23 @@ button:active, .btn-checkout-primary:active {
   }
 
   /* Pricing cell */
-  .price-list-table td.td-pricing {
+  .price-list-table td.td-mrp-col {
+    display: none !important;
+  }
+
+  .price-list-table td.td-rate-col {
     grid-area: price !important;
     display: flex !important;
     align-items: baseline !important;
-    gap: 5px !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .mobile-mrp {
+    display: inline-block !important;
+    font-size: 0.75rem !important;
+    color: #94a3b8 !important;
+    text-decoration: line-through !important;
   }
 
   .table-mrp {

@@ -8,7 +8,7 @@ const STORE_SETTINGS = {
   storeTagline: "Quality Crackers • Best Packages • Doorstep Delivery",
   whatsappPhone: "919361154329",
   contactPhone: "9361154329",
-  minOrderAmount: 500,
+  minOrderAmount: 3000,
   bannerNotice: "💥 POORNIKA CRACKERS: BOOKING CLOSES OCTOBER 31! Doorstep Delivery in Chennai, Chengalpattu, Thiruvallur & Kanchipuram! Cash on Delivery Available."
 };
 
@@ -2734,11 +2734,12 @@ function renderPriceListTables(singleProducts) {
                       <div class="table-item-desc">${item.description || ''}</div>
                       <span class="table-item-pack">${item.pieces || 'Standard Pack'}</span>
                     </td>
-                    <td class="td-pricing">
+                    <td class="td-pricing td-mrp-col">
                       <span class="table-mrp">₹${item.mrp.toLocaleString('en-IN')}</span>
                     </td>
-                    <td class="td-pricing">
+                    <td class="td-pricing td-rate-col">
                       <span class="table-rate">₹${item.price.toLocaleString('en-IN')}</span>
+                      ${item.mrp > item.price ? `<span class="table-mrp mobile-mrp">₹${item.mrp.toLocaleString('en-IN')}</span>` : ''}
                       <span class="table-discount-tag">${item.discount || '77% OFF'}</span>
                     </td>
                     <td class="td-qty" style="text-align: center;">
@@ -2890,11 +2891,11 @@ function updateCartUI() {
   if (cartDrawerSavingsEl) cartDrawerSavingsEl.textContent = `₹${savings.toLocaleString('en-IN')}`;
   if (cartDrawerTotalEl) cartDrawerTotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
 
-  const minOrder = STORE_SETTINGS.minOrderAmount || 500;
+  const minOrder = STORE_SETTINGS.minOrderAmount || 3000;
   if (cartMinAlertEl) {
     if (subtotal > 0 && subtotal < minOrder) {
       cartMinAlertEl.style.display = 'block';
-      cartMinAlertEl.innerHTML = `⚠️ Minimum order is <strong>₹${minOrder}</strong>. Please add ₹${minOrder - subtotal} more items.`;
+      cartMinAlertEl.innerHTML = `⚠️ Minimum order is <strong>₹${minOrder.toLocaleString('en-IN')}</strong>. Please add ₹${(minOrder - subtotal).toLocaleString('en-IN')} more items.`;
     } else {
       cartMinAlertEl.style.display = 'none';
     }
@@ -2948,9 +2949,9 @@ window.openOrderModal = function() {
   }
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const minOrder = STORE_SETTINGS.minOrderAmount || 500;
+  const minOrder = STORE_SETTINGS.minOrderAmount || 3000;
   if (subtotal < minOrder) {
-    alert(`Minimum order value is ₹${minOrder}. Please add ₹${minOrder - subtotal} more items to proceed.`);
+    alert(`Minimum order value is ₹${minOrder.toLocaleString('en-IN')}. Please add ₹${(minOrder - subtotal).toLocaleString('en-IN')} more items to proceed.`);
     return;
   }
 
