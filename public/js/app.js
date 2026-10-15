@@ -98,26 +98,68 @@ const PRODUCTS_DATA = [
     "description": "61 Festival Varieties + 1 Box 60 Multi-Colour Sky King Shots Free with Doorstep Delivery.",
     "freeBonus": "60 Multi-Colour Sky King Shots (FREE) - 1 Box",
     "itemsIncluded": [
-      "15cm Colour Sparklers (3 Boxes)",
-      "30cm Electric Sparklers (2 Boxes)",
-      "Ground Chakkars Special (3 Boxes)",
-      "Colour Koti Flower Pots (2 Boxes)",
-      "Flower Pots Ashoka (2 Boxes)",
-      "4\" Deluxe Lakshmi Crackers (3 Pkts)",
-      "Hydro Green Bombs (2 Boxes)",
-      "Whistling Rockets (1 Box)",
-      "100 Wala Garland (1 Pc)",
-      "Colour Smoke & Fountains (2 Boxes)",
-      "25 Multi-Colour Repeaters (1 Box)",
-      "Tri-Colour Deluxe Fountains (2 Boxes)",
-      "Wire Chakkars Special (2 Boxes)",
-      "Mega Peacock 5 Face (1 Box)",
-      "1/2 Kg Paper Bomb (1 Pkt)",
-      "50 Delux Garland (1 Pkt)",
-      "King of King Bombs (2 Boxes)",
-      "Tin Bear & Water Queen (2 Boxes)",
-      "Night Colour Shower (2 Boxes)",
-      "🎁 60 Multi-Colour Sky King Shots (FREE BONUS)"
+          "1000 Wala Big Garland - 1 Box",
+          "100 Wala Garland - 1 Box",
+          "28 Chorsa - 1 Pkt",
+          "28 Digital Watts - 2 Pkt",
+          "50 Deluxe Garland - 1 Pkt",
+          "Olai Vedi Big - 1 Pkt",
+          "2 3/4\" Kuruvi Crackers - 5 Pkt",
+          "1/2\" Lakshmi Crackers - 2 Pkt",
+          "3 1/2\" Lakshmi Crackers - 2 Pkt",
+          "4\" Deluxe Lakshmi Crackers - 2 Pkt",
+          "4\" Deluxe Lion - 1 Pkt",
+          "Gold Bijili 100 Pcs - 1 Pkt",
+          "Stripped Bijili 100 Pcs - 1 Pkt",
+          "Bullet Bomb - 2 Pkt",
+          "Hydro Green Bomb - 1 Box",
+          "Bullity Bomb - 1 Box",
+          "King of King Bomb - 1 Box",
+          "Tullaie Bomb - 1 Box",
+          "Chota Chocolate Bomb - 1 Box",
+          "1/4 kg Paper Bomb - 1 Pkt",
+          "Chota Paper Bomb - 1 Box",
+          "Zee Boom Baa - 1 Box",
+          "PUBG Gun Crackers - 1 Box",
+          "Ground Chakkar Big - 1 Box",
+          "Ground Chakkar Special - 1 Box",
+          "Ground Chakkar Deluxe - 1 Box",
+          "Wire Chakkar Special - 1 Box",
+          "Disco Wheel - 1 Box",
+          "Whistling Wheel - 1 Box",
+          "Colourful Wheel - 1 Box",
+          "Flower Pot Small - 1 Box",
+          "Flower Pot Big - 1 Box",
+          "Flower Pot Special - 1 Box",
+          "Colour Koti Flower Pots - 1 Box",
+          "Flower Pots Ashoka - 1 Box",
+          "10cm Electric Sparklers - 1 Box",
+          "10cm Colour Sparklers - 1 Box",
+          "10cm Green Sparklers - 1 Box",
+          "12cm Electric Sparklers - 1 Box",
+          "15cm Colour Sparklers - 1 Box",
+          "15cm Electric Sparklers - 1 Box",
+          "30cm Electric Sparklers - 1 Box",
+          "30cm Colour Sparklers - 1 Box",
+          "1 1/2 Feet Twinkling Star - 1 Box",
+          "Butterfly Special - 1 Box",
+          "Dancing Butterfly - 1 Box",
+          "Snake Cartoon - 1 Box",
+          "Photo Flash (Blue) - 1 Box",
+          "Photo Flash (Yellow) - 1 Box",
+          "Fuurniza - 1 Box",
+          "Golden Glouble - 1 Box",
+          "Chota Fancy (12 Pcs) - 1 Box",
+          "Magic Pops - 1 Box",
+          "Tin Beer Fountain - 1 Box",
+          "Tin Fountain - 1 Box",
+          "Water Queen - 1 Box",
+          "Magic Peacock - 1 Box",
+          "Mega Peacock 5 Face - 1 Box",
+          "Elephant Falls - 1 Box",
+          "Whistling Rockets - 1 Box",
+          "25 Multi-Colour Repeaters - 1 Box",
+          "💥 60 Multi-Colour Sky King Shots (FREE BONUS)"
     ]
   },
   {
@@ -135,25 +177,82 @@ const PRODUCTS_DATA = [
     "description": "75 Luxury Grand Celebration Varieties + 120 Multi-Colour Grand VIP Sky Show Free.",
     "freeBonus": "120 Multi-Colour Grand VIP Sky Show (FREE) - 1 Box",
     "itemsIncluded": [
-      "50cm Mega Colour Sparklers (2 Boxes)",
-      "30cm Electric Sparklers (3 Boxes)",
-      "Ground Chakkars Deluxe (4 Boxes)",
-      "Tri-Colour Deluxe Fountains (3 Boxes)",
-      "Colour Koti Special (3 Boxes)",
-      "5\" Mega Deluxe Lakshmi (4 Pkts)",
-      "Classic King Atom Bombs (3 Boxes)",
-      "Lunik Missile Rockets (2 Boxes)",
-      "1000 Wala Deluxe Garland (1 Box)",
-      "Multi-Color Aerial Repeaters (2 Pcs)",
-      "Colour Koti Jumbo Deluxe (1 Box)",
-      "Spinner Mix Vanitha (2 Boxes)",
-      "Dancing Peacock 5 Face (2 Boxes)",
-      "Bada Peacock (1 Box)",
-      "1 Kg Adiyal Paper Bomb (1 Box)",
-      "3.5\" Fancy Double Ball Pipe (2 Boxes)",
-      "50 Colour Rider Sky Show (1 Box)",
-      "10000 Wala Roll Box (1 Box)",
-      "🎁 120 Multi-Colour Grand VIP Sky Show (FREE BONUS)"
+          "2000 Wala Giant Garland - 1 Box",
+          "1000 Wala Deluxe Garland - 1 Box",
+          "100 Wala Garland - 1 Box",
+          "28 Chorsa - 2 Pkt",
+          "28 Digital Giant - 2 Pkt",
+          "50 Deluxe Garland - 2 Pkt",
+          "Olai Vedi Big - 2 Pkt",
+          "2 3/4\" Kuruvi Crackers - 5 Pkt",
+          "1/2\" Lakshmi Crackers - 2 Pkt",
+          "3\" Lakshmi Crackers - 2 Pkt",
+          "3 1/2\" Lakshmi Crackers - 2 Pkt",
+          "4\" Deluxe Lakshmi - 3 Pkt",
+          "5\" Mega Deluxe Lakshmi - 2 Pkt",
+          "4\" Deluxe Lion - 2 Pkt",
+          "Gold Bijili 100 Pcs - 2 Pkt",
+          "Stripped Bijili 100 Pcs - 2 Pkt",
+          "Classic King Atom Bombs - 2 Boxes",
+          "Hydro Green Bombs - 2 Boxes",
+          "Hydrio Bomb - 1 Box",
+          "Bullet Bomb - 2 Pkt",
+          "Bullity Bomb - 1 Box",
+          "King of King Bomb - 1 Box",
+          "Tullaie Bomb - 1 Box",
+          "Chota Chocolate Bomb - 1 Box",
+          "1/4 Kg Paper Bomb - 1 Pkt",
+          "1/2 Kg Paper Bomb - 1 Pkt",
+          "1 Kg Adiyal Paper Bomb - 1 Box",
+          "Zee Boom Baa - 1 Box",
+          "PUBG Gun Crackers - 1 Box",
+          "Ground Chakkar Big - 2 Boxes",
+          "Ground Chakkar Special - 2 Boxes",
+          "Ground Chakkar Deluxe - 2 Boxes",
+          "Ground Hakkai - 1 Box",
+          "Wire Chakkars Special - 1 Box",
+          "Disco Wheel - 1 Box",
+          "Whistling Wheel - 1 Box",
+          "Colourful Wheel - 1 Box",
+          "Flower Pots Small - 1 Box",
+          "Flower Pots Big - 2 Boxes",
+          "Flower Pots Special - 2 Boxes",
+          "Flower Pots Ashoka - 1 Box",
+          "Colour Koti Special - 2 Boxes",
+          "Colour Koti Jumbo Deluxe - 1 Box",
+          "10cm Electric Sparklers - 2 Boxes",
+          "10cm Colour Sparklers - 2 Boxes",
+          "12cm Electric Sparklers - 1 Box",
+          "12cm Crackling Sparklers - 1 Box",
+          "15cm Electric Sparklers - 1 Box",
+          "15cm Colour Sparklers - 1 Box",
+          "15cm Crackling Sparklers - 1 Box",
+          "19cm Crackling Sparklers - 1 Box",
+          "30cm Electric Sparklers - 2 Boxes",
+          "30cm Red Sparklers - 2 Boxes",
+          "30cm Green Sparklers - 2 Boxes",
+          "30cm Crackling Sparklers - 1 Box",
+          "50cm Mega Colour Sparklers - 1 Box",
+          "10\" Coronation Candle - 2 Boxes",
+          "1 1/2 Feet Twinkling Star - 1 Box",
+          "Twinkling Star Special - 1 Box",
+          "7 Up Seven Shot - 1 Box",
+          "12 Shots Multicolour - 1 Box",
+          "25 Shot Multicolour - 1 Box",
+          "Multi-Color Aerial Repeaters - 1 Box",
+          "50 Colour Rider Sky Show - 1 Box",
+          "Single Aerial Shell Fancy (Red) - 1 Box",
+          "Single Aerial Shell Fancy (Green) - 1 Box",
+          "Single Aerial Shell Fancy (Yellow) - 1 Box",
+          "Single Aerial Shell Fancy (Purple) - 1 Box",
+          "3.5\" Fancy Double Ball Pipe - 1 Box",
+          "Musical Rockets - 1 Box",
+          "Lunik Missile Rockets - 1 Box",
+          "Dancing Peacock 5 Face - 1 Box",
+          "Bada Peacock - 1 Box",
+          "Peacock Multi Color Fountain - 1 Box",
+          "Tom & Jerry Fountain - 1 Box",
+          "💥 120 Multi-Colour Grand VIP Sky Show (FREE BONUS)"
     ]
   },
 
@@ -2266,6 +2365,8 @@ const cartDrawerMrpEl = document.getElementById('cartDrawerMrp');
 const cartDrawerSavingsEl = document.getElementById('cartDrawerSavings');
 const cartDrawerTotalEl = document.getElementById('cartDrawerTotal');
 const cartMinAlertEl = document.getElementById('cartMinAlert');
+const btnClearCartEl = document.getElementById('btnClearCart');
+const btnFooterClearCartEl = document.getElementById('btnFooterClearCart');
 
 // Bottom Floating Summary Bar
 const bottomCartBarEl = document.getElementById('bottomCartBar');
@@ -2447,7 +2548,7 @@ function renderCombosSection(combos) {
 
         <!-- View Combo Items Button -->
         <button type="button" class="btn-view-combo-items" onclick="openComboItemsModal('${p.id}')">
-          <span>📋</span> <span>View Combo Items (${p.itemsIncluded ? p.itemsIncluded.length : 0}) &rarr;</span>
+          <span>📋</span> <span>View Combo Items (${p.itemsIncluded ? (p.itemsIncluded.filter(it => !it.includes('FREE') && !it.includes('🎁')).length || p.itemsIncluded.length) : 0}) &rarr;</span>
         </button>
 
         <div style="margin-top: auto; padding-top: 6px;" id="combo-action-${p.id}">
@@ -2491,7 +2592,11 @@ window.openComboItemsModal = function(pkgId) {
   const searchInput = document.getElementById('comboItemSearchInput');
 
   if (title) title.textContent = pkg.name;
-  if (sub) sub.textContent = `${pkg.pieces} • Total ${pkg.itemsIncluded ? pkg.itemsIncluded.length : 0} Items Included`;
+  if (sub) {
+    const mainCount = pkg.itemsIncluded ? pkg.itemsIncluded.filter(it => !it.includes('FREE') && !it.includes('🎁')).length : 0;
+    const hasBonus = pkg.itemsIncluded && pkg.itemsIncluded.some(it => it.includes('FREE') || it.includes('🎁'));
+    sub.textContent = `${pkg.pieces} • Total ${mainCount} Items ${hasBonus ? '+ Free Bonus' : ''} Included`;
+  }
   if (searchInput) searchInput.value = '';
 
   renderComboModalItemsList(pkg.itemsIncluded || []);
@@ -2741,6 +2846,7 @@ function saveCart() {
 }
 
 window.clearCart = function() {
+  if (!cart || cart.length === 0) return;
   cart = [];
   saveCart();
   PRODUCTS_DATA.forEach(p => {
@@ -2757,6 +2863,11 @@ function updateCartUI() {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const totalMrp = cart.reduce((sum, item) => sum + (item.mrp * item.quantity), 0);
   const savings = Math.max(0, totalMrp - subtotal);
+
+  // Toggle Header Clear button based on cart items
+  if (btnClearCartEl) {
+    btnClearCartEl.style.display = totalCount > 0 ? 'inline-flex' : 'none';
+  }
 
   // Navbar & Bottom Bar Cart badges
   if (navCartCountEl) navCartCountEl.textContent = totalCount;
@@ -2903,18 +3014,25 @@ window.submitWhatsAppOrder = function(e) {
   msg += `-------------------------------------------\n`;
   msg += `Hi Poornika Crackers, please confirm my Diwali crackers booking!`;
 
+  // WhatsApp Target URL with pre-filled order text
+  const waUrl = `https://wa.me/${targetWhatsapp}?text=${encodeURIComponent(msg)}`;
+
+  // Clear cart immediately
+  cart = [];
+  saveCart();
+  PRODUCTS_DATA.forEach(p => {
+    updateLiveRow(p, 0);
+  });
+  updateCartUI();
+
   // Close modal & drawer
   closeOrderModalDirect();
   if (typeof closeCartDrawer === 'function') {
     closeCartDrawer();
   }
 
-  // Clear cart so items don't stay in cart after order
-  clearCart();
-
-  // Open WhatsApp Link directly
-  const waUrl = `https://wa.me/${targetWhatsapp}?text=${encodeURIComponent(msg)}`;
-  window.open(waUrl, '_blank');
+  // Redirect directly to WhatsApp without popup blockers
+  window.location.href = waUrl;
 };
 
 // -------------------------------------------------------------
@@ -2967,10 +3085,12 @@ window.closeImageModal = function(e) {
 // Drawer Controls
 window.openCartDrawer = function() {
   if (cartDrawerEl) cartDrawerEl.classList.add('active');
+  if (bottomCartBarEl) bottomCartBarEl.style.display = 'none';
 };
 
 window.closeCartDrawer = function() {
   if (cartDrawerEl) cartDrawerEl.classList.remove('active');
+  if (bottomCartBarEl && cart.length > 0) bottomCartBarEl.style.display = 'flex';
 };
 
 window.closeCartDrawerOnOverlay = function(e) {
