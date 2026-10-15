@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>POORNIKA CRACKERS - Sivakasi Crackers Price List & WhatsApp Booking</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💥</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-notice-bar" id="topBanner">
+    💥 POORNIKA CRACKERS: BOOKING CLOSES OCTOBER 31! Doorstep Delivery in Chennai, Chengalpattu, Thiruvallur & Kanchipuram! Cash on Delivery Available.
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="./index.html" class="brand-logo">
+        <span class="brand-icon">🎆</span>
+        <div>
+          <h1 class="brand-title" id="brandTitle">POORNIKA CRACKERS</h1>
+          <p class="brand-sub" id="brandTagline">Quality Crackers • Best Packages • Doorstep Delivery</p>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a href="tel:9361154329" class="btn-call-header" title="Call Poornika Crackers">
+          <span>📞</span> <span class="hide-mobile">Call: 93611 54329</span><span class="show-mobile-only">Call</span>
+        </a>
+        <button class="btn-cart-nav btn-open-cart" title="View selected items">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count-badge" id="navCartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Delivery Locations Alert Banner -->
+  <div class="main-container" style="margin-top: 10px; margin-bottom: 10px;">
+    <div class="delivery-cities-bar">
+      <span>📍 <strong>Doorstep Delivery In:</strong> CHENNAI • CHENGALPATTU • THIRUVALLUR • KANCHIPURAM</span>
+      <span class="badge-free-del">FREE DELIVERY 🚚</span>
+      <span class="badge-cod">CASH ON DELIVERY 💵</span>
+      <span class="badge-closing">CLOSES OCT 31 ⏳</span>
+    </div>
+  </div>
+
+  <!-- Primary View Switcher Tabs (All vs Combos vs Single Items) -->
+  <div class="view-tabs-container">
+    <button class="view-tab-btn tab-all active" id="tabBtnAll" onclick="switchMainView('all')">
+      <span class="tab-icon">🌟</span>
+      <span class="tab-title">All Items</span>
+      <span class="tab-count-badge" id="badgeAllCount">33</span>
+    </button>
+    <button class="view-tab-btn tab-combos" id="tabBtnCombos" onclick="switchMainView('combos')">
+      <span class="tab-icon">🎁</span>
+      <span class="tab-title">Combos</span>
+      <span class="tab-count-badge" id="badgeCombosCount">3</span>
+    </button>
+    <button class="view-tab-btn tab-single" id="tabBtnSingle" onclick="switchMainView('single')">
+      <span class="tab-icon">📋</span>
+      <span class="tab-title">Single Items</span>
+      <span class="tab-count-badge" id="badgeSingleCount">30</span>
+    </button>
+  </div>
+
+  <!-- Category Filter & Live Search Sticky Bar -->
+  <div class="category-filter-nav" id="catFilterBar">
+    <div class="search-row-box">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="liveSearchInput" placeholder="Search crackers (e.g. Sparklers, Pots, 30 Shots, Lakshmi, Bombs...)">
+        <button id="clearSearchBtn" onclick="clearSearch()" style="display: none;">&times;</button>
+      </div>
+      <div class="calc-indicator-pill">
+        ⚡ Instant WhatsApp Order
+      </div>
+    </div>
+
+    <!-- Category Jump Scroll Pills -->
+    <div class="category-filter-scroll" id="catPillsContainer">
+      <!-- Populated dynamically by app.js -->
+    </div>
+  </div>
+
+  <main class="main-container">
+
+    <!-- ========================================================
+         SECTION 1: EXCLUSIVE COMBO PACKAGES (Poster Offers)
+         ======================================================== -->
+    <section id="combosSection" style="margin-bottom: 30px;">
+      <div class="section-headline-box">
+        <div>
+          <h2 class="section-headline-title">
+            <span>🎁</span> Exclusive Diwali Combo Packages
+          </h2>
+          <p class="section-headline-subtitle">
+            All-in-one family hampers with FREE Sky Shots & Free Doorstep Delivery!
+          </p>
+        </div>
+        <div class="free-shots-banner-pill">
+          💥 Free 30 / 60 / 120 Shots with packages!
+        </div>
+      </div>
+
+      <!-- 3 Package Cards Grid -->
+      <div class="package-tier-grid" id="packagesTierContainer">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SECTION 2: SINGLE PRODUCTS PRICE LIST (Like gmrcrackers)
+         ======================================================== -->
+    <section id="priceListSection" style="margin-bottom: 36px;">
+      <div class="section-headline-box">
+        <div>
+          <h2 class="section-headline-title">
+            <span>📋</span> Sivakasi Direct Price List (Single Items)
+          </h2>
+          <p class="section-headline-subtitle">
+            Wholesale Sivakasi Rates • Flat 70% - 80% Discount • Automatic Bill Calculation
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span style="font-size: 0.78rem; color: #16a34a; font-weight: 800; background: #dcfce7; padding: 4px 10px; border-radius: 9999px;">
+            ✓ Minimum Order ₹500
+          </span>
+        </div>
+      </div>
+
+      <!-- Category-wise Table Containers -->
+      <div id="priceListTablesContainer">
+        <!-- Rendered dynamically by app.js categorized by Sound Crackers, Chakkars, Pots, Sparklers, etc. -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       WHATSAPP DIRECT ORDER POPUP MODAL (Fast & Simple)
+       ======================================================== -->
+  <div class="order-modal-overlay" id="orderModal" onclick="closeOrderModal(event)">
+    <div class="order-modal-card">
+      <div class="order-modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.5rem;">📲</span>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; margin: 0; color: #ffffff;">Send Order via WhatsApp</h3>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 2px 0 0;">WhatsApp Number: <strong>93611 54329</strong></p>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeOrderModalDirect()">&times;</button>
+      </div>
+
+      <div class="order-modal-body">
+        <!-- Order Bill Summary Snippet -->
+        <div class="modal-bill-summary">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span id="modalSummaryItemsCount">0 Items Selected</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-weight: 800; font-size: 0.95rem; color: #1e293b;">Total Amount:</span>
+            <span id="modalSummaryTotal" style="font-size: 1.4rem; font-weight: 900; color: #dc2626;">₹0</span>
+          </div>
+        </div>
+
+        <form id="whatsappOrderForm" onsubmit="submitWhatsAppOrder(event)">
+          <div class="form-group-modal">
+            <label for="orderCustName">Your Full Name *</label>
+            <input type="text" id="orderCustName" required placeholder="Enter your full name" autocomplete="name">
+          </div>
+
+          <div class="form-group-modal">
+            <label for="orderCustPhone">WhatsApp Mobile Number *</label>
+            <input type="tel" id="orderCustPhone" required placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" inputmode="numeric">
+          </div>
+
+          <div class="form-group-modal">
+            <label for="orderCustCity">Delivery City / Town *</label>
+            <select id="orderCustCity" required>
+              <option value="Chennai">Chennai</option>
+              <option value="Chengalpattu">Chengalpattu</option>
+              <option value="Thiruvallur">Thiruvallur</option>
+              <option value="Kanchipuram">Kanchipuram</option>
+              <option value="Other">Other Location</option>
+            </select>
+          </div>
+
+          <div class="form-group-modal">
+            <label for="orderCustAddress">Street Address / Landmark *</label>
+            <textarea id="orderCustAddress" required rows="2" placeholder="House/Flat No, Street, Landmark"></textarea>
+          </div>
+
+
+          <button type="submit" class="btn-send-whatsapp-final">
+            <span>💬</span> <span>Open WhatsApp & Send Order &rarr;</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawer" onclick="closeCartDrawerOnOverlay(event)">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <div class="cart-drawer-title">
+          <span>🛒</span> Selected Crackers Cart
+        </div>
+        <button class="btn-close-drawer" onclick="closeCartDrawer()">&times;</button>
+      </div>
+
+      <div class="cart-drawer-body">
+        <div class="cart-min-notice" id="cartMinAlert" style="display: none;"></div>
+        <div class="cart-items-list" id="cartItemsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="bill-row">
+          <span>Doorstep Delivery</span>
+          <span style="color: #16a34a; font-weight: 800;">FREE 🚚</span>
+        </div>
+        <div class="bill-row total-row">
+          <span>Total Payable Amount</span>
+          <span id="cartDrawerTotal" style="color: var(--secondary); font-size: 1.35rem;">₹0</span>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <button class="btn-whatsapp-order" onclick="openOrderModal()" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 13px;">
+            <span>💬</span> Order via WhatsApp Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Floating Order & Cart Summary Bar -->
+  <div class="bottom-cart-bar" id="bottomCartBar" style="display: none;">
+    <div class="cart-bar-inner">
+      <div class="cart-bar-total-info">
+        <span class="cart-bar-items" id="bottomCartItems">0 Items</span>
+        <span class="cart-bar-amount" id="bottomCartAmount">₹0</span>
+      </div>
+
+      <div class="cart-bar-actions">
+        <button class="btn-cart-nav btn-open-cart" title="View cart details" style="background: #1e293b; color: #ffffff; border: 1px solid #334155; padding: 8px 12px; display: inline-flex; align-items: center; gap: 6px;">
+          <span>🛒</span>
+          <span class="cart-count-badge" id="bottomCartCountBadge">0</span>
+        </button>
+        <button class="btn-whatsapp-order" onclick="openOrderModal()" style="padding: 10px 18px; font-size: 0.9rem;">
+          <span>💬</span> <span>Order on WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Image Preview Modal -->
+  <div class="image-preview-modal" id="imageModal" onclick="closeImageModal(event)">
+    <div class="modal-content-card">
+      <button class="modal-close-btn" onclick="closeImageModalDirect()">&times;</button>
+      <img id="modalImg" src="" alt="Crackers Preview" class="modal-img">
+      <div class="modal-body">
+        <span id="modalCategory" style="font-size: 0.75rem; font-weight: 800; color: #dc2626; text-transform: uppercase;"></span>
+        <h3 id="modalTitle" style="font-size: 1.25rem; font-weight: 900; color: #0f172a; margin: 4px 0;"></h3>
+        <p id="modalPack" style="font-size: 0.82rem; font-weight: 700; color: #0369a1;"></p>
+        <p id="modalDesc" style="font-size: 0.85rem; color: #64748b; margin: 8px 0;"></p>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+          <div>
+            <span id="modalMrp" style="color: #94a3b8; text-decoration: line-through; font-weight: 700; font-size: 0.95rem;"></span>
+            <span id="modalPrice" style="color: #dc2626; font-size: 1.35rem; font-weight: 900; margin-left: 6px;"></span>
+          </div>
+          <button id="modalActionBtn" class="btn-checkout-primary" style="padding: 8px 16px; font-size: 0.88rem;">
+            Add to Order +
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Combo Package Items Details Modal (View All 50-75 Items) -->
+  <div class="combo-modal-overlay" id="comboItemsModal" onclick="closeComboModal(event)">
+    <div class="combo-modal-card">
+      <div class="combo-modal-header">
+        <div>
+          <span class="combo-modal-tag">🎁 OFFICIAL FESTIVE COMBO</span>
+          <h3 id="comboModalTitle" style="font-size: 1.25rem; font-weight: 900; color: #ffffff; margin: 4px 0 0;"></h3>
+          <p id="comboModalSubtitle" style="font-size: 0.8rem; color: #fef08a; margin-top: 2px; font-weight: 700;"></p>
+        </div>
+        <button class="combo-close-btn" onclick="closeComboModalDirect()" title="Close">&times;</button>
+      </div>
+
+      <div class="combo-modal-search-box">
+        <input type="text" id="comboItemSearchInput" placeholder="🔍 Search item inside this package..." oninput="filterComboModalItems(this.value)">
+      </div>
+
+      <div class="combo-modal-body" id="comboModalBody">
+        <!-- Numbered list of items populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: #0f172a; color: #94a3b8; padding: 40px 20px 90px; margin-top: 50px; text-align: center; font-size: 0.88rem;">
+    <div style="max-width: 860px; margin: 0 auto;">
+      <h3 style="color: white; margin-bottom: 8px; font-size: 1.3rem;">🎆 POORNIKA CRACKERS</h3>
+      <p style="margin-bottom: 8px;">Quality Crackers • Sivakasi Direct Wholesale Prices • Free Doorstep Delivery</p>
+      <p style="color: #cbd5e1; margin-bottom: 16px;">
+        Serving: <strong>Chennai • Chengalpattu • Thiruvallur • Kanchipuram</strong> | Booking closes Oct 31!
+      </p>
+      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 20px; line-height: 1.5;">
+        ⚠️ <strong>Safety Warning:</strong> Complying with regulatory guidelines for fireworks. Orders are confirmed and dispatched safely. Always ignite fireworks in open outdoor areas under adult supervision.
+      </p>
+      <div style="border-top: 1px solid #1e293b; padding-top: 20px;">
+        <span>© 2026 Poornika Crackers. WhatsApp & Helpline: <a href="https://wa.me/919361154329" style="color: #25d366; text-decoration: none; font-weight: 700;">93611 54329</a>.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fully Static JavaScript (Self-contained) -->
+  <script src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>My Orders - POORNIKA CRACKERS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+  <style>
+    .profile-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .order-history-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+  </style>
+</head>
+<body style="background-color: #f1f5f9; padding-bottom: 80px;">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="brand-icon">🎆</span>
+        <div>
+          <span class="brand-title">POORNIKA CRACKERS</span>
+          <p class="brand-sub">My Orders</p>
+        </div>
+      </a>
+      <a href="/" style="text-decoration: none; font-weight: 700; color: #475569; font-size: 0.9rem;">
+        &larr; Back to Shop
+      </a>
+    </div>
+  </header>
+
+  <div class="main-container" style="max-width: 720px; margin-top: 20px;">
+    
+    <!-- Customer Saved Address Card (Shown if customer has previously ordered) -->
+    <div class="profile-card" id="profileBox" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.5rem;">📍</span>
+          <div>
+            <h4 style="font-size: 1.05rem; font-weight: 900; color: #1e293b;" id="dispName">-</h4>
+            <span style="font-size: 0.78rem; color: #16a34a; font-weight: 700;">✓ Saved Delivery Address (Auto-fills on re-order)</span>
+          </div>
+        </div>
+        <button onclick="toggleEditProfile()" style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+          ✏️ Edit
+        </button>
+      </div>
+
+      <div style="font-size: 0.85rem; color: #475569; line-height: 1.5;" id="dispDetails">
+        <!-- Filled by JS -->
+      </div>
+
+      <!-- Edit Form (Hidden by default) -->
+      <form id="editProfileForm" style="display: none; margin-top: 14px; border-top: 1px dashed #cbd5e1; padding-top: 14px;" onsubmit="saveProfileChanges(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="editName" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="editPhone" required pattern="[0-9]{10}">
+        </div>
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="editAddress" required rows="2"></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="editCity" required>
+          </div>
+          <div class="form-group">
+            <label>Pincode</label>
+            <input type="text" id="editPincode" required pattern="[0-9]{6}">
+          </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" onclick="toggleEditProfile()" style="background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer;">Cancel</button>
+          <button type="submit" class="btn-checkout-primary" style="padding: 6px 16px; font-size: 0.85rem;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order History List -->
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="font-size: 1.25rem; font-weight: 900; color: #1e293b;">
+          📦 Your Orders
+        </h3>
+        <a href="/" style="font-size: 0.85rem; font-weight: 700; color: #d97706; text-decoration: none;">+ Order New Package</a>
+      </div>
+
+      <div id="ordersContainer">
+        <!-- Directly Populated by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDirectOrders();
+    });
+
+    async function loadDirectOrders() {
+      const container = document.getElementById('ordersContainer');
+      const profileBox = document.getElementById('profileBox');
+      const profile = JSON.parse(localStorage.getItem('saved_customer_profile') || 'null');
+      const deviceOrderIds = JSON.parse(localStorage.getItem('my_orders') || '[]');
+
+      // 1. Show Saved Profile if it exists
+      if (profile && profile.name) {
+        profileBox.style.display = 'block';
+        document.getElementById('dispName').textContent = profile.name;
+        document.getElementById('dispDetails').innerHTML = `
+          <strong>Phone:</strong> ${profile.phone}<br>
+          <strong>Address:</strong> ${profile.address}, ${profile.city} - ${profile.pincode}
+        `;
+
+        document.getElementById('editName').value = profile.name;
+        document.getElementById('editPhone').value = profile.phone;
+        document.getElementById('editAddress').value = profile.address;
+        document.getElementById('editCity').value = profile.city;
+        document.getElementById('editPincode').value = profile.pincode;
+      } else {
+        profileBox.style.display = 'none';
+      }
+
+      // 2. If no orders exist on device yet
+      if (deviceOrderIds.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 50px 20px; background: white; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+            <span style="font-size: 3.5rem;">🛍️</span>
+            <h3 style="margin-top: 10px; font-size: 1.3rem; font-weight: 900; color: #1e293b;">No Orders Placed Yet</h3>
+            <p style="color: #64748b; font-size: 0.9rem; margin-top: 6px; max-width: 400px; margin-left: auto; margin-right: auto;">
+              You haven't ordered any festival packages yet. When you place an order, your packages and real-time status will appear right here automatically!
+            </p>
+            <a href="/" class="btn-checkout-primary" style="margin-top: 18px; display: inline-flex; padding: 12px 24px; font-size: 0.95rem;">
+              Choose a Festival Package Now &rarr;
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      // 3. Directly load all orders placed by this customer
+      container.innerHTML = `<div style="text-align: center; padding: 30px; color: #64748b;">Loading your orders...</div>`;
+
+      try {
+        // Fetch all order objects for the saved IDs
+        const promises = deviceOrderIds.map(id => 
+          fetch(`/api/orders/${id}`).then(r => r.json()).catch(() => null)
+        );
+        const results = await Promise.all(promises);
+        const orders = results.filter(r => r && r.success && r.order).map(r => r.order);
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 40px; background: white; border-radius: 12px; color: #64748b;">
+              No recent orders found.
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = orders.map(o => {
+          let statusBadge = '<span class="status-badge-lg status-pending" style="font-size:0.75rem;">Verification Pending ⏳</span>';
+          if (o.status === 'CONFIRMED') statusBadge = '<span class="status-badge-lg status-confirmed" style="font-size:0.75rem;">Confirmed ✅</span>';
+          if (o.status === 'SHIPPED') statusBadge = '<span class="status-badge-lg status-shipped" style="font-size:0.75rem;">Dispatched 🚚</span>';
+
+          return `
+            <div class="order-history-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 0.75rem; color: #64748b; font-weight: 700;">ORDER ID</span>
+                  <h4 style="color: #1e293b; font-size: 1.1rem; font-weight: 900; margin-top: 1px;">${o.id}</h4>
+                  <small style="color: #64748b;">Placed on: ${new Date(o.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</small>
+                </div>
+                <div>${statusBadge}</div>
+              </div>
+
+              <div style="background: #f8fafc; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;">
+                ${o.items.map(i => `
+                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem; padding: 3px 0;">
+                    <span><strong>${i.name}</strong> (Qty: ${i.quantity})</span>
+                    <strong style="color: #1e293b;">₹${i.total.toLocaleString('en-IN')}</strong>
+                  </div>
+                `).join('')}
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #e2e8f0; padding-top: 12px;">
+                <div>
+                  <span style="font-size: 0.8rem; color: #64748b;">Payment Method:</span>
+                  <strong style="font-size: 0.85rem; margin-left: 4px;">${o.payment?.method === 'COD' ? '🚚 Cash on Delivery' : '⚡ UPI Online'}</strong>
+                  <div style="font-size: 1.15rem; font-weight: 900; color: var(--secondary); margin-top: 2px;">₹${o.totalAmount.toLocaleString('en-IN')}</div>
+                </div>
+
+                <a href="/order-success.html?orderId=${o.id}" style="background: #334155; color: white; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none;">
+                  🖨️ View Invoice
+                </a>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        container.innerHTML = `<div style="text-align: center; padding: 30px; color: #dc2626;">Error loading orders.</div>`;
+      }
+    }
+
+    function toggleEditProfile() {
+      const form = document.getElementById('editProfileForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function saveProfileChanges(e) {
+      e.preventDefault();
+      const updated = {
+        name: document.getElementById('editName').value.trim(),
+        phone: document.getElementById('editPhone').value.trim(),
+        address: document.getElementById('editAddress').value.trim(),
+        city: document.getElementById('editCity').value.trim(),
+        pincode: document.getElementById('editPincode').value.trim()
+      };
+      localStorage.setItem('saved_customer_profile', JSON.stringify(updated));
+      alert('✅ Delivery address updated! It will be automatically filled for all future orders.');
+      toggleEditProfile();
+      loadDirectOrders();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Checkout - POORNIKA CRACKERS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💥</text></svg>">
+</head>
+<body style="background-color: #f1f5f9; min-height: 100vh;">
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="brand-icon">🎆</span>
+        <div>
+          <span class="brand-title" id="checkoutBrandTitle">POORNIKA CRACKERS</span>
+          <p class="brand-sub">Fast & Secure Diwali Booking</p>
+        </div>
+      </a>
+      <a href="/" style="text-decoration: none; font-weight: 700; color: #475569; font-size: 0.9rem; display: flex; align-items: center; gap: 4px;">
+        &larr; <span>Back to Shop</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Checkout Container (Single-Column, Clean & Mobile-Friendly) -->
+  <div class="checkout-container">
+
+    <!-- Welcome Back Notice (Auto-filled Profile) -->
+    <div id="savedProfileNotice" style="display: none;"></div>
+
+    <!-- Step 1: Delivery Address Card -->
+    <div class="checkout-card" id="addressCard">
+      <div class="checkout-card-header">
+        <span class="checkout-step-badge">1</span>
+        <div>
+          <h3 class="checkout-card-title">Delivery Address</h3>
+          <p class="checkout-card-subtitle">Where should we deliver your Diwali packages?</p>
+        </div>
+      </div>
+
+      <form id="checkoutDeliveryForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="custName">Full Name *</label>
+          <input type="text" id="custName" required placeholder="Enter your full name" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="custPhone">Mobile Number (10 Digits) *</label>
+          <input type="tel" id="custPhone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" autocomplete="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="custAddress">Full Street Address (Door / Flat / Landmark) *</label>
+          <textarea id="custAddress" required rows="2" placeholder="House/Flat No, Apartment, Street name, Landmark" autocomplete="street-address"></textarea>
+        </div>
+
+        <div class="checkout-form-grid-2">
+          <div class="form-group">
+            <label for="custCity">City / Town *</label>
+            <input type="text" id="custCity" required placeholder="e.g. Chennai, Chengalpattu">
+          </div>
+          <div class="form-group">
+            <label for="custPincode">Pincode *</label>
+            <input type="text" id="custPincode" required placeholder="6-digit pincode" pattern="[0-9]{6}" maxlength="6" inputmode="numeric">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 2: Order Summary Card -->
+    <div class="checkout-card" id="summaryCard">
+      <div class="checkout-card-header">
+        <span class="checkout-step-badge">2</span>
+        <div>
+          <h3 class="checkout-card-title">Order Summary</h3>
+          <p class="checkout-card-subtitle">Review your selected Diwali packages</p>
+        </div>
+      </div>
+
+      <div id="checkoutItemsList" class="checkout-items-summary">
+        <!-- Populated dynamically by JS -->
+      </div>
+
+      <div class="checkout-totals-box">
+        <div class="bill-row">
+          <span>Items Subtotal</span>
+          <span id="checkoutSubtotal" style="font-weight: 700; color: #1e293b;">₹0</span>
+        </div>
+        <div class="bill-row">
+          <span>Delivery Charges</span>
+          <span style="color: #16a34a; font-weight: 800;">FREE 🚚</span>
+        </div>
+        <div class="bill-row total-row" style="margin-top: 8px; padding-top: 10px; border-top: 2px dashed #cbd5e1;">
+          <span style="font-size: 1.15rem; font-weight: 900; color: #0f172a;">Total Payable:</span>
+          <span id="checkoutTotal" style="font-size: 1.45rem; font-weight: 900; color: #dc2626;">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Choose Payment Method (2 CLEAR ACTION BUTTONS!) -->
+    <div class="checkout-card" id="paymentSelectionCard">
+      <div class="checkout-card-header">
+        <span class="checkout-step-badge">3</span>
+        <div>
+          <h3 class="checkout-card-title">Choose Payment & Place Order</h3>
+          <p class="checkout-card-subtitle">Tap one of the options below to confirm your order</p>
+        </div>
+      </div>
+
+      <!-- Address Missing Alert (Triggered if user clicks payment before filling required fields) -->
+      <div id="checkoutValidationAlert" style="display: none; background: #fef2f2; border: 1.5px solid #fecaca; color: #991b1b; padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; margin-bottom: 16px;">
+        ⚠️ Please complete your delivery address details above first.
+      </div>
+
+      <!-- The 2 Payment Action Buttons -->
+      <div class="payment-action-buttons" id="paymentButtonsContainer">
+        
+        <!-- Button 1: Cash on Delivery -->
+        <button type="button" class="btn-pay-action btn-pay-cod" id="btnPlaceCod">
+          <div class="btn-pay-icon-col">
+            <span class="pay-icon">🚚</span>
+          </div>
+          <div class="btn-pay-content">
+            <div class="btn-pay-header-row">
+              <span class="btn-pay-name">Cash on Delivery</span>
+              <span class="badge-cod">Pay at Doorstep</span>
+            </div>
+            <p class="btn-pay-desc">Pay cash when fireworks are delivered to your home.</p>
+          </div>
+          <div class="btn-pay-action-arrow">&rarr;</div>
+        </button>
+
+        <!-- Button 2: Pay Online with UPI -->
+        <button type="button" class="btn-pay-action btn-pay-online" id="btnPayOnline">
+          <div class="btn-pay-icon-col">
+            <span class="pay-icon">⚡</span>
+          </div>
+          <div class="btn-pay-content">
+            <div class="btn-pay-header-row">
+              <span class="btn-pay-name">Pay Online (UPI / QR Code)</span>
+              <span class="badge-online">GPay / PhonePe / Paytm</span>
+            </div>
+            <p class="btn-pay-desc">Instant payment via Dynamic QR Code or direct UPI app link.</p>
+          </div>
+          <div class="btn-pay-action-arrow">&rarr;</div>
+        </button>
+
+      </div>
+
+      <!-- Dynamic UPI Payment Drawer (Revealed smoothly right here when "Pay Online" is clicked) -->
+      <div id="onlineUpiDrawer" class="online-upi-box" style="display: none;">
+        
+        <div style="text-align: center; margin-bottom: 16px;">
+          <span style="background: #fef3c7; color: #92400e; font-size: 0.82rem; font-weight: 800; padding: 4px 12px; border-radius: 9999px; display: inline-block; text-transform: uppercase;">
+            ⚡ Instant Dynamic UPI Payment
+          </span>
+          <h4 style="font-size: 1.25rem; font-weight: 900; color: #1e293b; margin-top: 8px;">Scan or Tap to Pay</h4>
+          <div class="qr-amount-callout" id="displayQrAmount">₹0</div>
+          <p class="qr-merchant-info" id="displayMerchantInfo">Merchant: POORNIKA CRACKERS</p>
+        </div>
+
+        <!-- Real-time dynamic QR code -->
+        <div style="text-align: center;">
+          <img id="qrCodeImage" src="" alt="UPI QR Code" class="qr-code-img">
+          <p style="font-size: 0.82rem; color: #64748b; font-weight: 600;">
+            Scan with GPay, PhonePe, Paytm, or any BHIM UPI App
+          </p>
+        </div>
+
+        <!-- Mobile Direct UPI Buttons (Opens GPay directly or PhonePe/Paytm directly) -->
+        <div class="upi-apps-button-group">
+          <!-- Button A: Direct Google Pay (GPay) -->
+          <a href="#" id="gpayDirectLink" class="btn-gpay-direct">
+            <span style="font-size: 1.2rem;">🟢</span>
+            <span>Pay Directly with Google Pay (GPay)</span>
+          </a>
+
+          <!-- Button B: PhonePe / Paytm / Any UPI App -->
+          <a href="#" id="mobileUpiLink" class="btn-phonepe-direct">
+            <span style="font-size: 1.2rem;">🟣</span>
+            <span>Pay with PhonePe / Paytm / Any UPI</span>
+          </a>
+        </div>
+
+        <!-- Payment Verification Form -->
+        <div class="payment-steps-list">
+          <strong style="color: #92400e;">📢 Payment Confirmation Steps:</strong>
+          <ol>
+            <li>Complete payment of the exact amount in your UPI app.</li>
+            <li>Copy the <strong>12-digit UTR / UPI Reference Number</strong> from payment receipt.</li>
+            <li>Paste it below and click <strong>"Confirm Payment & Place Order"</strong>.</li>
+          </ol>
+        </div>
+
+        <form id="paymentVerifyForm">
+          <input type="hidden" id="createdOrderId" value="">
+
+          <div class="form-group">
+            <label for="utrNumber">12-Digit UTR / UPI Ref ID *</label>
+            <input type="text" id="utrNumber" required placeholder="e.g. 428901234567" maxlength="20" style="font-weight: 800; letter-spacing: 1.5px; font-size: 1.1rem; border: 2px solid #94a3b8;">
+            <small style="color: #64748b; font-size: 0.8rem; margin-top: 4px; display: block;">
+              (Found in your GPay / PhonePe / Paytm transaction receipt)
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentScreenshot">Payment Screenshot (Optional)</label>
+            <input type="file" id="paymentScreenshot" accept="image/*" style="font-size: 0.88rem; padding: 8px;">
+          </div>
+
+          <button type="submit" class="btn-checkout-primary" id="btnSubmitVerification" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 14px; font-size: 1rem;">
+            <span>✅ Confirm Payment & Place Order</span>
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+
+    <!-- Trust Badges -->
+    <div style="text-align: center; margin-top: 24px; color: #64748b; font-size: 0.84rem; display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <span>🔒 100% Safe Checkout</span>
+      <span>🚚 Direct Sivakasi Delivery</span>
+      <span>⭐ Premium Festive Quality</span>
+    </div>
+
+  </div>
+
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

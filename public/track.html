@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order - POORNIKA CRACKERS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+  <style>
+    .track-search-box {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      max-width: 640px;
+      margin: 24px auto;
+      text-align: center;
+    }
+    .track-input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .track-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .track-input:focus {
+      border-color: var(--primary);
+    }
+    .order-track-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .timeline-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 24px 0;
+    }
+    .timeline-steps::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+    .timeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      width: 33.33%;
+      text-align: center;
+    }
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .timeline-step.completed .step-circle {
+      background: #10b981;
+      border-color: #059669;
+      color: white;
+    }
+    .timeline-step.active .step-circle {
+      background: #f59e0b;
+      border-color: #d97706;
+      color: white;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .step-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #475569;
+    }
+    .timeline-step.completed .step-label {
+      color: #047857;
+    }
+  </style>
+</head>
+<body style="background-color: #f1f5f9; padding-bottom: 80px;">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="brand-icon">🎆</span>
+        <div>
+          <span class="brand-title">POORNIKA CRACKERS</span>
+          <p class="brand-sub">Real-Time Order Tracking</p>
+        </div>
+      </a>
+      <a href="/" style="text-decoration: none; font-weight: 700; color: #475569; font-size: 0.9rem;">
+        &larr; Back to Shop
+      </a>
+    </div>
+  </header>
+
+  <div class="main-container">
+    
+    <!-- Search Form -->
+    <div class="track-search-box">
+      <span style="font-size: 2.8rem;">📦</span>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #1e293b; margin-top: 6px;">Track Your Crackers Order</h2>
+      <p style="color: #64748b; font-size: 0.88rem; margin-top: 4px;">
+        No login or password needed. Simply enter your <strong>Phone Number</strong> or <strong>Order ID</strong>.
+      </p>
+
+      <form id="trackForm" onsubmit="handleTrack(event)">
+        <div class="track-input-group">
+          <input type="text" id="trackQuery" class="track-input" required placeholder="Enter 10-digit Phone Number (e.g. 9848012345) or Order ID">
+          <button type="submit" class="btn-checkout-primary" id="btnTrack">
+            Track Order &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Results Container -->
+    <div id="trackResults" style="margin-top: 24px;">
+      <!-- Populated by JS -->
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check query param from URL (e.g., track.html?query=9848012345)
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get('query') || urlParams.get('phone') || urlParams.get('orderId');
+
+      if (queryParam) {
+        document.getElementById('trackQuery').value = queryParam;
+        searchOrders(queryParam);
+      } else {
+        // Auto-load recent orders placed on this device
+        loadDeviceOrders();
+      }
+    });
+
+    function handleTrack(e) {
+      e.preventDefault();
+      const query = document.getElementById('trackQuery').value.trim();
+      if (!query) return;
+      searchOrders(query);
+    }
+
+    async function searchOrders(query) {
+      const container = document.getElementById('trackResults');
+      const btn = document.getElementById('btnTrack');
+      btn.disabled = true;
+      btn.textContent = 'Searching...';
+
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #64748b;">
+          <span>⏳ Looking up your orders...</span>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`/api/orders/track?query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        btn.disabled = false;
+        btn.textContent = 'Track Order →';
+
+        if (!data.success || !data.orders || data.orders.length === 0) {
+          container.innerHTML = `
+            <div class="order-track-card" style="text-align: center; padding: 40px;">
+              <span style="font-size: 3rem;">🔍</span>
+              <h3 style="margin-top: 10px; color: #1e293b;">No Orders Found</h3>
+              <p style="color: #64748b; font-size: 0.9rem; margin-top: 4px;">
+                No orders match "${query}". Please verify your 10-digit mobile number or Order ID.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        renderOrderList(data.orders);
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Track Order →';
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #dc2626;">
+            Error connecting to server. Please try again.
+          </div>
+        `;
+      }
+    }
+
+    function loadDeviceOrders() {
+      const saved = JSON.parse(localStorage.getItem('my_orders') || '[]');
+      if (saved.length > 0) {
+        // Look up the most recent order from device
+        searchOrders(saved[0]);
+      }
+    }
+
+    function renderOrderList(orders) {
+      const container = document.getElementById('trackResults');
+
+      container.innerHTML = orders.map(o => {
+        let badgeClass = 'status-pending';
+        let badgeText = 'Payment Verification Pending ⏳';
+        let step1 = 'completed', step2 = '', step3 = '';
+
+        if (o.status === 'CONFIRMED') {
+          badgeClass = 'status-confirmed';
+          badgeText = o.payment?.method === 'COD' ? 'Order Confirmed (Cash on Delivery) ✅' : 'Payment Verified & Confirmed ✅';
+          step1 = 'completed';
+          step2 = 'completed';
+          step3 = 'active';
+        } else if (o.status === 'SHIPPED') {
+          badgeClass = 'status-shipped';
+          badgeText = 'Dispatched / Out for Delivery 🚚';
+          step1 = 'completed';
+          step2 = 'completed';
+          step3 = 'completed';
+        } else if (o.status === 'CANCELLED') {
+          badgeClass = 'status-pending';
+          badgeText = 'Order Cancelled ❌';
+        }
+
+        return `
+          <div class="order-track-card">
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px;">
+              <div>
+                <span style="font-size: 0.78rem; color: #64748b; font-weight: 700;">ORDER ID</span>
+                <h3 style="font-size: 1.15rem; font-weight: 900; color: #1e293b;">${o.id}</h3>
+                <small style="color: #64748b;">Placed on: ${new Date(o.createdAt).toLocaleString('en-IN')}</small>
+              </div>
+
+              <div>
+                <span class="status-badge-lg ${badgeClass}" style="font-size: 0.8rem;">
+                  ${badgeText}
+                </span>
+              </div>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="timeline-steps">
+              <div class="timeline-step ${step1}">
+                <div class="step-circle">${step1 === 'completed' ? '✓' : '1'}</div>
+                <span class="step-label">Order Placed</span>
+              </div>
+
+              <div class="timeline-step ${step2}">
+                <div class="step-circle">${step2 === 'completed' ? '✓' : '2'}</div>
+                <span class="step-label">Verified</span>
+              </div>
+
+              <div class="timeline-step ${step3}">
+                <div class="step-circle">${step3 === 'completed' ? '✓' : '3'}</div>
+                <span class="step-label">Dispatched</span>
+              </div>
+            </div>
+
+            <!-- Order Details -->
+            <div style="background: #f8fafc; border-radius: 8px; padding: 14px; margin-bottom: 16px; font-size: 0.88rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: #64748b;">Customer Name:</span>
+                <strong>${o.customer.name}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: #64748b;">Phone:</span>
+                <strong>${o.customer.phone}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: #64748b;">Delivery To:</span>
+                <span style="text-align: right; max-width: 60%;">${o.customer.address}, ${o.customer.city} (${o.customer.pincode})</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="color: #64748b;">Payment Method:</span>
+                <strong>${o.payment?.method === 'COD' ? '🚚 Cash on Delivery' : '⚡ UPI Payment (UTR: ' + (o.payment?.utrNumber || 'Pending') + ')'}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-top: 1px dashed #cbd5e1; padding-top: 8px; margin-top: 8px;">
+                <span style="font-weight: 700; color: #1e293b;">Total Amount:</span>
+                <strong style="color: var(--secondary); font-size: 1.15rem;">₹${o.totalAmount.toLocaleString('en-IN')}</strong>
+              </div>
+            </div>
+
+            <!-- Items -->
+            <div style="margin-bottom: 16px;">
+              <h5 style="font-size: 0.85rem; font-weight: 800; color: #475569; margin-bottom: 8px; text-transform: uppercase;">Items in Order:</h5>
+              ${o.items.map(i => `
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; padding: 4px 0;">
+                  <span>${i.name} (Qty: ${i.quantity})</span>
+                  <strong>₹${i.total}</strong>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Actions -->
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <a href="/order-success.html?orderId=${o.id}" class="btn-checkout-primary" style="padding: 8px 18px; font-size: 0.85rem; background: #334155; color: white; box-shadow: none;">
+                🖨️ View Full Invoice
+              </a>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>

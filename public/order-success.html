@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Order Confirmed & Invoice - POORNIKA CRACKERS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💥</text></svg>">
+  <style>
+    @media print {
+      body { background: white !important; padding: 0 !important; }
+      .no-print { display: none !important; }
+      .invoice-card { box-shadow: none !important; border: 1px solid #000 !important; max-width: 100% !important; margin: 0 !important; }
+    }
+  </style>
+</head>
+<body style="background-color: #f1f5f9; padding: 20px 10px 80px;">
+
+  <div class="no-print" style="max-width: 680px; margin: 0 auto 16px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="/" style="text-decoration: none; font-weight: 700; color: #475569; font-size: 0.9rem;">
+      &larr; Back to Home
+    </a>
+    <button onclick="window.print()" style="background: white; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;">
+      🖨️ Print / Save PDF
+    </button>
+  </div>
+
+  <div class="invoice-card" id="invoiceCard">
+    <div style="text-align: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px;">
+      <span style="font-size: 3.5rem;" id="successEmoji">🎉</span>
+      <h2 style="font-size: 1.6rem; font-weight: 900; color: #1e293b; margin-top: 8px;" id="successHeading">Order Placed Successfully!</h2>
+      <p style="color: #64748b; font-size: 0.9rem; margin-top: 4px;" id="successSubheading">Your order details have been received.</p>
+      
+      <div style="margin-top: 14px;">
+        <span class="status-badge-lg status-confirmed" id="orderStatusBadge">Order Confirmed ✅</span>
+      </div>
+    </div>
+
+    <!-- Order Meta -->
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; font-size: 0.88rem; background: #f8fafc; padding: 12px 16px; border-radius: 8px;">
+      <div>
+        <span style="color: #64748b; display: block;">Order ID:</span>
+        <strong id="invoiceOrderId" style="font-size: 1rem; color: #1e293b;">-</strong>
+      </div>
+      <div>
+        <span style="color: #64748b; display: block;">Date:</span>
+        <strong id="invoiceDate">-</strong>
+      </div>
+      <div>
+        <span style="color: #64748b; display: block;" id="invoicePaymentLabel">Payment Method:</span>
+        <strong id="invoiceUtr" style="color: #b45309;">-</strong>
+      </div>
+    </div>
+
+    <!-- Customer Details -->
+    <div style="margin-bottom: 20px; font-size: 0.9rem;">
+      <h4 style="color: #334155; font-weight: 800; margin-bottom: 6px;">Delivery Details:</h4>
+      <div id="invoiceCustomer" style="line-height: 1.6; color: #475569;">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <!-- Items Table -->
+    <h4 style="color: #334155; font-weight: 800; margin-bottom: 10px;">Ordered Items:</h4>
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 20px;">
+      <thead>
+        <tr style="background: #f1f5f9; text-align: left;">
+          <th style="padding: 8px 10px; border-bottom: 1px solid #e2e8f0;">Item</th>
+          <th style="padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: center;">Qty</th>
+          <th style="padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">Rate</th>
+          <th style="padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">Total</th>
+        </tr>
+      </thead>
+      <tbody id="invoiceItemsTable">
+        <!-- Filled by JS -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="padding: 10px; text-align: right; font-weight: 600;">Subtotal:</td>
+          <td id="invoiceSubtotal" style="padding: 10px; text-align: right; font-weight: 700;">₹0</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="padding: 10px; text-align: right; font-weight: 600;">Delivery Fee:</td>
+          <td style="padding: 10px; text-align: right; font-weight: 700; color: #16a34a;">FREE</td>
+        </tr>
+        <tr style="border-top: 2px solid #1e293b;">
+          <td colspan="3" style="padding: 12px 10px; text-align: right; font-size: 1.1rem; font-weight: 900;">Total Paid:</td>
+          <td id="invoiceGrandTotal" style="padding: 12px 10px; text-align: right; font-size: 1.2rem; font-weight: 900; color: var(--secondary);">₹0</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- Actions (Return to Shop) -->
+    <div class="no-print" style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px;">
+      <a href="/" style="background: var(--bg-dark); color: #fbbf24; padding: 12px; border-radius: 9999px; text-decoration: none; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        &larr; Back to Shop / Home
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('orderId');
+
+      if (!orderId) {
+        alert('Order ID not found.');
+        window.location.href = '/';
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/orders/${orderId}`);
+        const data = await res.json();
+
+        if (!data.success || !data.order) {
+          alert('Failed to load order details.');
+          return;
+        }
+
+        const o = data.order;
+
+        // Settings for whatsapp number
+        const setRes = await fetch('/api/settings');
+        const setData = await setRes.json();
+        const whatsappNumber = setData.settings?.whatsappPhone || '919876543210';
+
+        // Order Meta
+        document.getElementById('invoiceOrderId').textContent = o.id;
+        document.getElementById('invoiceDate').textContent = new Date(o.createdAt).toLocaleString('en-IN');
+        
+        const isCod = o.payment && o.payment.method === 'COD';
+        const headingEl = document.getElementById('successHeading');
+        const subheadingEl = document.getElementById('successSubheading');
+        const badge = document.getElementById('orderStatusBadge');
+        const paymentLabelEl = document.getElementById('invoicePaymentLabel');
+        const utrEl = document.getElementById('invoiceUtr');
+
+        if (isCod) {
+          if (headingEl) headingEl.textContent = 'Cash on Delivery Order Confirmed! 🚚';
+          if (subheadingEl) subheadingEl.textContent = 'Your Diwali package is booked! Please pay cash when delivered to your doorstep.';
+          if (paymentLabelEl) paymentLabelEl.textContent = 'Payment Mode:';
+          if (utrEl) {
+            utrEl.textContent = 'Cash on Delivery (COD)';
+            utrEl.style.color = '#15803d';
+          }
+          if (badge) {
+            badge.textContent = 'Booking Confirmed (COD) ✅';
+            badge.className = 'status-badge-lg status-confirmed';
+          }
+        } else {
+          if (headingEl) headingEl.textContent = 'Online Payment Submitted! ⚡';
+          if (subheadingEl) subheadingEl.textContent = 'Your payment details have been submitted for verification.';
+          if (paymentLabelEl) paymentLabelEl.textContent = '12-Digit UTR Number:';
+          if (utrEl) {
+            utrEl.textContent = o.payment?.utrNumber || 'Pending verification';
+            utrEl.style.color = '#b45309';
+          }
+          if (badge) {
+            if (o.status === 'CONFIRMED') {
+              badge.textContent = 'Payment Verified & Confirmed ✅';
+              badge.className = 'status-badge-lg status-confirmed';
+            } else {
+              badge.textContent = 'Payment Verification Pending ⏳';
+              badge.className = 'status-badge-lg status-pending';
+            }
+          }
+        }
+
+        // Customer Info
+        document.getElementById('invoiceCustomer').innerHTML = `
+          <strong>${o.customer.name}</strong><br>
+          Phone: ${o.customer.phone}<br>
+          Address: ${o.customer.address}, ${o.customer.city} - ${o.customer.pincode}
+        `;
+
+        // Items Table
+        const tbody = document.getElementById('invoiceItemsTable');
+        tbody.innerHTML = o.items.map(item => `
+          <tr style="border-bottom: 1px solid #f1f5f9;">
+            <td style="padding: 8px 10px;">${item.name}</td>
+            <td style="padding: 8px 10px; text-align: center;">${item.quantity}</td>
+            <td style="padding: 8px 10px; text-align: right;">₹${item.price}</td>
+            <td style="padding: 8px 10px; text-align: right; font-weight: 700;">₹${item.total}</td>
+          </tr>
+        `).join('');
+
+        document.getElementById('invoiceSubtotal').textContent = `₹${o.subtotal.toLocaleString('en-IN')}`;
+        document.getElementById('invoiceGrandTotal').textContent = `₹${o.totalAmount.toLocaleString('en-IN')}`;
+
+
+      } catch (err) {
+        console.error('Invoice load error:', err);
+      }
+    });
+  </script>
+</body>
+</html>

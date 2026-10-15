@@ -1,0 +1,27 @@
+# Node dependencies
+node_modules/
+
+# Environment and sensitive keys
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Uploaded payment screenshots (protect customer privacy & save repo size)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Auto-generated product backups
+data/products.backup*
+
+# Order records (uncomment if you want to avoid uploading real customer data to GitHub)
+# data/orders.json
