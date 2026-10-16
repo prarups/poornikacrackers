@@ -18,9 +18,15 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use(express.static(path.join(__dirname, 'public')));
+const noCacheStatic = {
+  etag: false,
+  setHeaders: (res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+};
+app.use('/js', express.static(path.join(__dirname, 'js'), noCacheStatic));
+app.use('/css', express.static(path.join(__dirname, 'css'), noCacheStatic));
+app.use(express.static(path.join(__dirname, 'public'), noCacheStatic));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
