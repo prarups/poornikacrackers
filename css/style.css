@@ -1246,6 +1246,162 @@ body {
   background: #f8fafc;
 }
 
+/* ----------------- HERO BANNER ----------------- */
+.hero-banner-container {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.16);
+  border: 2px solid #fde047;
+  background: #110e1b;
+  margin-bottom: 12px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-banner-container:hover {
+  box-shadow: 0 8px 28px rgba(234, 179, 8, 0.28);
+}
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ----------------- FESTIVE DELIVERY MARQUEE TICKER ----------------- */
+.festive-ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e1b4b 0%, #3b0764 50%, #1e1b4b 100%);
+  border: 1.5px solid #f59e0b;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.22);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 12px;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  user-select: none;
+}
+
+.festive-ticker-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: festiveTickerScroll 30s linear infinite;
+}
+
+.festive-ticker-wrap:hover .festive-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes festiveTickerScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ticker-item-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+}
+
+.ticker-text {
+  color: #fef08a;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticker-city-highlight {
+  color: #ffffff;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.4px;
+}
+
+.ticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.ticker-badge-free {
+  background: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.45);
+}
+
+.ticker-badge-cod {
+  background: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.45);
+}
+
+.ticker-badge-closing {
+  background: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.45);
+}
+
+.ticker-cracker-pill {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.24), rgba(239, 68, 68, 0.24));
+  border: 1px solid rgba(253, 224, 71, 0.5);
+  color: #fde047;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.ticker-sep {
+  color: #f59e0b;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .festive-ticker-wrap {
+    padding: 7px 0;
+  }
+  .festive-ticker-track {
+    animation-duration: 25s;
+  }
+  .ticker-text {
+    font-size: 0.78rem;
+  }
+  .ticker-badge {
+    font-size: 0.68rem;
+    padding: 3px 7px;
+  }
+  .ticker-cracker-pill {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+  }
+}
+
 /* ----------------- 3 PACKAGE TIER CARDS ----------------- */
 .delivery-cities-bar {
   background: #fef3c7;
