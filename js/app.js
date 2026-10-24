@@ -25,7 +25,7 @@ const PRODUCTS_DATA = [
     "discount": "54% OFF",
     "badge": "💥 30 CRACKLING SHOT FREE!",
     "stock": true,
-    "image": "images/pic1.png",
+    "image": "images/pic1.webp",
     "description": "51 Festival Varieties + 1 Box 30 Crackling Shots Free with Doorstep Delivery.",
     "freeBonus": "30 Crackling Shot (FREE) - 1 Box",
     "itemsIncluded": [
@@ -93,7 +93,7 @@ const PRODUCTS_DATA = [
     "discount": "55% OFF",
     "badge": "⭐ MOST POPULAR • 60 SHOTS FREE!",
     "stock": true,
-    "image": "images/pic2.png",
+    "image": "images/pic2.webp",
     "description": "61 Festival Varieties + 1 Box 60 Multi-Colour Sky King Shots Free with Doorstep Delivery.",
     "freeBonus": "60 Multi-Colour Sky King Shots (FREE) - 1 Box",
     "itemsIncluded": [
@@ -172,7 +172,7 @@ const PRODUCTS_DATA = [
     "discount": "56% OFF",
     "badge": "👑 VIP LUXURY • 120 SHOTS FREE!",
     "stock": true,
-    "image": "images/pic3.png",
+    "image": "images/pic3.webp",
     "description": "75 Luxury Grand Celebration Varieties + 120 Multi-Colour Grand VIP Sky Show Free.",
     "freeBonus": "120 Multi-Colour Grand VIP Sky Show (FREE) - 1 Box",
     "itemsIncluded": [
@@ -2525,7 +2525,7 @@ function renderCombosSection(combos) {
         ${isPopular ? '<div class="popular-ribbon">⭐ Most Popular Deal</div>' : ''}
         
         <div class="pkg-img-wrapper" onclick="openProductModal('${p.id}')">
-          <img src="${p.image}" alt="${String(p.name).replace(/"/g, '&quot;')}" class="pkg-img" loading="lazy">
+          <img src="${p.image}" alt="${String(p.name).replace(/"/g, '&quot;')}" class="pkg-img" loading="lazy" decoding="async">
           <span class="pkg-img-badge">${p.discount || '50% OFF'}</span>
         </div>
 
@@ -2725,7 +2725,7 @@ function renderPriceListTables(singleProducts) {
                 return `
                   <tr class="${qty > 0 ? 'has-qty' : ''}" id="row-${item.id}">
                     <td class="td-img">
-                      <img src="${item.image}" alt="${String(item.name).replace(/"/g, '&quot;')}" class="table-img-thumb" 
+                      <img src="${item.image}" alt="${String(item.name).replace(/"/g, '&quot;')}" class="table-img-thumb" loading="lazy" decoding="async"
                            onclick="openProductModal('${item.id}')" title="Click to view details">
                     </td>
                     <td class="td-info">
